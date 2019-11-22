@@ -6,6 +6,8 @@ import com.pusher.client.channel.SubscriptionEventListener;
 import com.pusher.client.connection.ConnectionEventListener;
 import com.pusher.client.connection.ConnectionState;
 import com.pusher.client.connection.ConnectionStateChange;
+import com.pn.groupC.dailyfaces.interfaces.*;
+
 
 import org.json.JSONObject;
 
@@ -14,9 +16,12 @@ public class PostEvent {
     private PusherOptions options;
     private Pusher pusher;
     private Channel channel;
+    private PostInterfaces postInterfaces;
+
 
 
     public void initPusher() {
+        postInterfaces = new PostInterfaces();
         options = new PusherOptions();
         options.setCluster("eu");
         // initialize Pusher
@@ -45,8 +50,15 @@ public class PostEvent {
             public void onEvent(String channelName, String eventName, final String data) {
                 try {
                     JSONObject jsonData = new JSONObject(data);
-                    System.out.println(jsonData.get("type"));
-                    newPost(jsonData);
+                    String type  = jsonData.get("type").toString();
+                    switch (type){
+                        case "new_post":
+                            newPost(jsonData);
+                            break;
+                        case "new_my_day":
+                            newMyDay(jsonData);
+                            break;
+                    }
                 } catch (Exception e) {
                     System.out.println(e);
                 }
@@ -57,15 +69,15 @@ public class PostEvent {
 
     }
 
-    public void newPost(JSONObject data) {
-        System.out.println(data);
-    }
-
-    public void newMessage(JSONObject data) {
+    public void newPost(JSONObject post) {
+        postInterfaces.news_feed.addFirst(post);
+        System.out.println(postInterfaces.news_feed);
 
     }
 
-    public void newMyDay() {
+    public void newMyDay(JSONObject my_day) {
+        postInterfaces.my_day.addFirst(my_day);
+        System.out.println(postInterfaces.my_day);
 
     }
 }
