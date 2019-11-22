@@ -1,4 +1,4 @@
-package com.pn.groupC.dailyfaces;
+package com.example.slidermenu;
 
 import org.junit.Test;
 
