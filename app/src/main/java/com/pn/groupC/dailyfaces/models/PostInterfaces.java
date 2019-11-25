@@ -1,4 +1,4 @@
-package com.pn.groupC.dailyfaces.interfaces;
+package com.pn.groupC.dailyfaces.models;
 import org.json.JSONObject;
 import java.util.*;
 public class PostInterfaces {
