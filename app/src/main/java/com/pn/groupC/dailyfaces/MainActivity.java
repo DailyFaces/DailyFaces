@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        PostEvent postEvnt = new PostEvent();
-        postEvnt.initPusher();
+        ChatEvent chatevt = new ChatEvent();
+        chatevt.initPusher();
     }
 }
