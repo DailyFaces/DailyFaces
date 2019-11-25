@@ -1,80 +1,74 @@
 package com.example.myapplication;
+
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
-public class Network  {
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    // static variable single_instance of type Singleton
-    private static Network single_instance = null;
+import java.util.HashMap;
+import java.util.Map;
 
-    // variable of type String
-    public String url;
-    public String route;
-    public String responseString;
-    public VolleyError volleyError;
-    public Context context;
+public class Network{
+    private ImageLoader imageLoader;
+    IResult mResultCallback = null;
+    Context mContext;
 
-    // private constructor restricted to this class itself
-    private Network(String url,String route, Context context)
-    {
-        this.url = url;
-        this.route = route;
-        this.context = context;
+    Network(IResult resultCallback, Context context) {
+        mResultCallback = resultCallback;
+        mContext = context;
     }
 
-    public String getResponseString(){
-        return responseString;
+    final String url = "http://172.16.11.44:9000";
+    public void request( String api, final Map<String,String> parameter) {
+
+        Map<String, String>  params = new HashMap<String, String>();
+        for (Map.Entry<String,String> entry : parameter.entrySet()) {
+            params.put(entry.getKey(),entry.getValue());
+        }
+        try {
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                    this.url+api, new JSONObject(params),
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            //Success Callback
+                            if (mResultCallback != null)
+                        mResultCallback.notifySuccess(response);
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            //Failure Callback
+                            if (mResultCallback != null)
+                        mResultCallback.notifyError(error);
+                        }
+                    });
+
+            Singleton.getInstance(mContext).addToRequestQueue(jsonObjReq);
+        } catch (Exception e) {
+
+        }
     }
 
-    public VolleyError getVolleyError(){
-        return volleyError;
+    private void loadImage(String url, ImageView imageView){
+            //link to search (https://coderzpassion.com/android-working-volley-library/)
+
+        imageLoader = Singleton.getInstance(mContext)
+                .getImageLoader();
+//        imageLoader.get(url, ImageLoader.getImageListener(imageView,
+//                R.drawable., android.R.drawable
+//                        .ic_dialog_alert));
+//        imageView.setImage.setImageUrl(url, imageLoader);
     }
-
-    public void setResponseString(String response){
-        this.responseString = response;
-    }
-    // static method to create instance of Singleton class
-    public static Network getInstance(String url,String route, Context context)
-    {
-        if (single_instance == null)
-            single_instance = new Network(url, route,context);
-
-        return single_instance;
-    }
-
-    public String volley(){
-
-        this.responseString = "response is null";
-        this.volleyError = null;
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this.context);
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, this.url+this.route,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        //CODE HERE FOR THE RESPONSE
-                        
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //CODE HERE FOR HANDLING ERROR
-                volleyError = error;
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-
-        return responseString;
-    }
-
 }
