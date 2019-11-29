@@ -2,29 +2,34 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@+id/nav_profile">
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_newsfeed">
+
+
 
     <fragment
-        android:id="@+id/nav_logout"
-        android:name="com.example.slidermenu.ui.logout.logout.LogoutFragment"
-        android:label="@string/menu_logout"
-        tools:layout="@layout/fragment_logout" />
-    <fragment
         android:id="@+id/nav_profile"
-        android:name="com.example.slidermenu.ui.profile.ProfileFragment"
+        android:name="com.pn.groupc.dailyfaces.ui.profile.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/nav_messages"
-        android:name="com.example.slidermenu.ui.messages.MessagesFragment"
+        android:name="com.pn.groupc.dailyfaces.ui.messages.MessagesFragment"
         android:label="@string/menu_messages"
         tools:layout="@layout/fragment_messages" />
 
     <fragment
         android:id="@+id/nav_newsfeed"
-        android:name="com.example.slidermenu.ui.newsfeed.NewsfeedFragment"
+        android:name="com.pn.groupc.dailyfaces.ui.newsfeed.NewsfeedFragment"
         android:label="@string/menu_newsfeed"
         tools:layout="@layout/fragment_newsfeed" />
+
+
+    <fragment
+        android:id="@+id/nav_logout"
+        android:name="com.pn.groupc.dailyfaces.ui.logout.LogoutFragment"
+        android:label="@string/menu_logout"
+        tools:layout="@layout/fragment_logout" />
 
 </navigation>
