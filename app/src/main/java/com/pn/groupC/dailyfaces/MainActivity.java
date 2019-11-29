@@ -1,10 +1,10 @@
-package com.pn.groupC.dailyfaces;
+package com.pn.groupc.dailyfaces;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.pn.groupC.dailyfaces.services.*;
+import com.pn.groupc.dailyfaces.services.*;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.pn.groupC.dailyfaces.interfaces;
+package com.pn.groupc.dailyfaces.interfaces;
 
 import java.util.ArrayList;
 import java.util.HashMap;

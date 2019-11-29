@@ -1,4 +1,4 @@
-package com.pn.groupC.dailyfaces.interfaces;
+package com.pn.groupc.dailyfaces.interfaces;
 
 import org.json.JSONObject;
 

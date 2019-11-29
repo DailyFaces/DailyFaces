@@ -1,11 +1,11 @@
-package com.pn.groupC.dailyfaces.services;
+package com.pn.groupc.dailyfaces.services;
 
-import com.pn.groupC.dailyfaces.interfaces.InboxInterface;
-import com.pn.groupC.dailyfaces.interfaces.PostInterfaces;
-import com.pn.groupC.dailyfaces.interfaces.chatInterface;
+import com.pn.groupc.dailyfaces.interfaces.InboxInterface;
+import com.pn.groupc.dailyfaces.interfaces.chatInterface;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
 import com.pusher.client.channel.Channel;
+import com.pusher.client.channel.PusherEvent;
 import com.pusher.client.channel.SubscriptionEventListener;
 import com.pusher.client.connection.ConnectionEventListener;
 import com.pusher.client.connection.ConnectionState;
@@ -24,8 +24,9 @@ public class ChatEvent {
 
     public void initPusher() {
         ChatInterface = new chatInterface();
+        inboxInterface = new InboxInterface();
         options = new PusherOptions();
-        options.setCluster("eu");
+        options.setCluster("ap1");
         // initialize Pusher
         pusher = new Pusher("5e71cf67fedab567924b", options);
 
@@ -49,16 +50,15 @@ public class ChatEvent {
 
         channel.bind("my-event", new SubscriptionEventListener() {
             @Override
-            public void onEvent(String channelName, String eventName, final String data) {
+            public void onEvent(PusherEvent event) {
+//                System.out.println(event.getData());
                 try {
-                    JSONObject jsonData = new JSONObject(data);
+                    JSONObject jsonData = new JSONObject(event.getData());
                     newChat(jsonData);
                     toInbox(jsonData);
                 } catch (Exception e) {
                     System.out.println(e);
                 }
-
-
             }
         });
 
@@ -66,15 +66,13 @@ public class ChatEvent {
     public void newChat(JSONObject msg) {
         ChatInterface.chats.add(msg);
         System.out.println(ChatInterface.chats);
-
     }
     public void toInbox(JSONObject msg){
-        //not yet final
-        try {
+        try{
             HashMap msgs =  new HashMap<String, String>();
             msgs.put(msg.get("sender"),msg.get("message"));
             inboxInterface.inbox.add(msgs);
-        }catch (Exception e){
+        }catch(Exception e){
             System.out.println(e);
         }
     }
