@@ -1,0 +1,64 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.myapplication1"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="15"
+8-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:4:1-62
+11-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:4:18-60
+12
+13    <application
+13-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:5:1-29:15
+14        android:allowBackup="true"
+14-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:6:5-31
+15        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+15-->[androidx.core:core:1.0.1] C:\Users\burceje_sd2023\.gradle\caches\transforms-2\files-2.1\46da25c3e2ae6308b2227b660caa604d\core-1.0.1\AndroidManifest.xml:22:18-86
+16        android:debuggable="true"
+17        android:icon="@mipmap/ic_launcher"
+17-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:7:5-39
+18        android:label="@string/app_name"
+18-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:8:5-37
+19        android:roundIcon="@mipmap/ic_launcher_round"
+19-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:9:5-50
+20        android:supportsRtl="true"
+20-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:10:5-31
+21        android:testOnly="true"
+22        android:theme="@style/AppTheme" >
+22-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:11:5-36
+23        <activity android:name="com.example.myapplication1.Register" />
+23-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:12:5-51
+23-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:12:15-39
+24        <activity android:name="com.example.myapplication1.Dashboard" />
+24-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:13:5-52
+24-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:13:15-40
+25        <!-- <activity android:name=".Dashboard" -->
+26        <!-- android:parentActivityName=".MainActivity"> -->
+27        <!-- &lt;!&ndash; The meta-data tag is required if you support API level 15 and lower &ndash;&gt; -->
+28        <!-- <meta-data -->
+29        <!-- android:name="android.support.PARENT_ACTIVITY" -->
+30        <!-- android:value=".MainActivity" /> -->
+31        <!-- </activity> -->
+32        <activity android:name="com.example.myapplication1.MainActivity" >
+32-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:21:5-27:16
+32-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:21:15-43
+33            <intent-filter>
+33-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:22:9-26:25
+34                <action android:name="android.intent.action.MAIN" />
+34-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:23:13-65
+34-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:23:21-62
+35
+36                <category android:name="android.intent.category.LAUNCHER" />
+36-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:25:13-73
+36-->C:\Users\burceje_sd2023\Downloads\MyApplication1\app\src\main\AndroidManifest.xml:25:23-70
+37            </intent-filter>
+38        </activity>
+39    </application>
+40
+41</manifest>
