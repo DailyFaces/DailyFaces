@@ -31,4 +31,6 @@ public class Route {
     final String statusUpdate = "/status/update";
     //delete status
     final String statusDelete = "/status/delete/:account_id";               //WARNING: THIS IS A GET ROUTE
+
+    final String image = "/images";
 }

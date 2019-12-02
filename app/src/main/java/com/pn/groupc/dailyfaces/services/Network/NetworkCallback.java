@@ -4,7 +4,7 @@ import com.android.volley.VolleyError;
 
 import org.json.JSONObject;
 
-public interface IResult {
+public interface NetworkCallback {
     public void notifySuccess(JSONObject response);
     public void notifyError(VolleyError error);
 
