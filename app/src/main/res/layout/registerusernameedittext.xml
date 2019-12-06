@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/Username"
+        android:id="@+id/registerusername"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="270dp"

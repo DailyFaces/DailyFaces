@@ -5,86 +5,38 @@
     android:id="@+id/linearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/colorWhite"
     tools:context=".Register"
     tools:visibility="visible">
 
-    <include layout="@layout/buttonregister"/>
+    <include
+        android:id="@+id/include"
+        layout="@layout/usernameedittext"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
-    <EditText
-        android:id="@+id/Username"
-        android:layout_width="245dp"
-        android:layout_height="44dp"
+    <include
+        layout="@layout/passwordedittext"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
-        android:ems="20"
-        android:hint="Enter Username"
-        android:inputType="textPersonName"
+    <include
+        layout="@layout/buttonlogin"
         app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <include layout="@layout/buttonregister" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="166dp"
+        android:layout_height="166dp"
+        android:layout_marginTop="88dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.226" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="246dp"
-        android:layout_height="41dp"
-        android:ems="20"
-        android:hint="Enter Password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.31" />
-
-    <Button
-        android:id="@+id/btnlogin"
-        android:layout_width="108dp"
-        android:layout_height="45dp"
-        android:layout_marginBottom="384dp"
-        android:background="#3398E5"
-        android:text="LogIn"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.458"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.993" />
-
-    <Button
-        android:id="@+id/btnregister"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="111dp"
-        android:layout_height="41dp"
-        android:background="#33E560"
-        android:text="Register"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.463"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.528" />
-
-    <TextView
-        android:id="@+id/testing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_right"
-        android:layout_marginEnd="190dp"
-        android:layout_marginRight="190dp"
-        android:layout_marginBottom="610dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
+        app:layout_constraintTop_toTopOf="@+id/include"
+        app:srcCompat="@drawable/finals" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

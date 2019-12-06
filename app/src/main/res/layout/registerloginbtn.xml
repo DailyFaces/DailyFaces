@@ -3,13 +3,13 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        android:id="@+id/btnregister"
+        android:id="@+id/registerpagebtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="510dp"
         android:layout_marginRight="@dimen/margin_right"
         android:layout_marginLeft="@dimen/margin_left"
-        android:layout_marginTop="460dp"
-        android:background="@drawable/registerbtncolor"
+        android:background="@drawable/loginbtncolor"
         android:text="REGISTER"
         android:textColor="#FFFEFF"
         android:textSize="18sp" />
