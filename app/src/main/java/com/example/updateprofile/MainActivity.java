@@ -26,6 +26,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.myapplication.ImageInterface;
+import com.example.services.ImageLoader.ImagesLoader;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -218,9 +221,10 @@ public class MainActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         String url ="http://172.16.11.32:3000/profiles/create";
 //        String url ="http://172.16.11.15:3000/images/create";
+//        String url ="http://172.16.11.15:3000/images/create";
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("account_id", "1");
+        params.put("account_id", "9");
         params.put("extension", extension);
         params.put("image", path);
         Log.e("params","==> " + params);
@@ -232,12 +236,25 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject  response) {
-                        RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), decodeBase64(response.optString("image")));
-                        circularBitmapDrawable.setCircular(true);
-                        profilePic.setImageDrawable(circularBitmapDrawable);
-                        saveBtn.setVisibility(View.GONE);
-                        Toast.makeText(MainActivity.this,"Your profile picture is updated",Toast.LENGTH_LONG).show();
-                        System.out.println(response.optString("image"));
+                        System.out.println(response.toString());
+                        try {
+                            JSONArray data = response.getJSONArray("rows");
+                            JSONObject responseData = (JSONObject) data.get(0);
+
+//                            RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), decodeBase64(response.optString("image")));
+                            ImagesLoader loadImage = new ImagesLoader(imageCallback(), getApplicationContext());
+                            loadImage.loadImage(responseData.optString("url"));
+//                        RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), response.optString("url"));
+//                        circularBitmapDrawable.setCircular(true);
+//                        profilePic.setImageDrawable(circularBitmapDrawable);
+                            saveBtn.setVisibility(View.GONE);
+                            Toast.makeText(MainActivity.this,"Your profile picture is updated",Toast.LENGTH_LONG).show();
+                            System.out.println(response.optString("image"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+//
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -248,6 +265,23 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         queue.add(jsonObjectRequest);
+    }
+
+    public ImageInterface imageCallback(){
+        ImageInterface callback = new ImageInterface() {
+            @Override
+            public void notifySuccess(Bitmap image) {
+                RoundedBitmapDrawable circularBitmapDrawable = RoundedBitmapDrawableFactory.create(getResources(), image);
+                circularBitmapDrawable.setCircular(true);
+                profilePic.setImageDrawable(circularBitmapDrawable);
+            }
+
+            @Override
+            public void notifyError(FailReason error) {
+
+            }
+        };
+        return callback;
     }
 
     public static Bitmap decodeBase64(String input)
