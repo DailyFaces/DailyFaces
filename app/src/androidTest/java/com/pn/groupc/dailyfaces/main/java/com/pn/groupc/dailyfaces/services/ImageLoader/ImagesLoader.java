@@ -13,16 +13,28 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+
 //IMPORTANT NOTE: IMPORT NOSTRA13 DEPENDENCY ON GRADLE
 //implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+//FOR THE ANDROID MANIFESTS
+//<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 public class ImagesLoader {
     Context mContext;
     ImageInterface imageCallback = null;
@@ -35,7 +47,7 @@ public class ImagesLoader {
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void getImage(String api) {
-        final String url = "http://172.16.11.44:3000";
+        final String url = "http://172.16.11.32:3000";
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
                 (Request.Method.GET, url + api, null, new Response.Listener<JSONObject>() {
 
@@ -45,7 +57,7 @@ public class ImagesLoader {
                             mResultCallback.notifySuccess(response);
                         try {
                             String res = response.getString("url");
-                            loadImage(url + res);     //WHAT TO DO AFTER HERE ???
+                            loaderInterface(url+"/images"+"/file1575280555214.jpg");     //WHAT TO DO AFTER HERE ???
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -83,8 +95,49 @@ public class ImagesLoader {
         Singleton.getInstance(mContext).addToRequestQueue(jsonObjectRequest);
     }
 
-    public void loadImage(String uri) {
-        loaderInterface(uri);
+    public void stringReq(String api){
+        final String URL = "http://172.16.11.32:3000";
+        StringRequest request = new StringRequest(Request.Method.GET, URL+api, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                String[] strArray = new String[] {response};
+
+                String data = strArray[0];
+                JSONArray jsonArr = null;
+
+                try {
+                    jsonArr = new JSONArray(data);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                for (int i = 0; i < jsonArr.length(); i++)
+                {
+                    JSONObject jsonObj = null;
+                    try {
+                        jsonObj = jsonArr.getJSONObject(i);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    System.out.println(jsonObj.optString("url"));
+                    loaderInterface(URL+jsonObj.optString("url"));
+                }
+
+                if(mResultCallback!=null){
+                    mResultCallback.stringSuccess(response);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("ERROR");
+
+                if(mResultCallback!=null){
+                    mResultCallback.notifyError(error);
+                }
+            }
+        });
+        Singleton.getInstance(mContext).addToRequestQueue(request);
     }
 
     public void loaderInterface(String uri) {
