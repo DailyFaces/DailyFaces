@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.services.ImageLoader;
 
 import android.graphics.Bitmap;
 import com.nostra13.universalimageloader.core.assist.FailReason;

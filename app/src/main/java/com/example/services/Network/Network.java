@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.services.Network;
 
 import android.content.Context;
 
@@ -17,10 +17,10 @@ import java.util.Map;
 
 public class Network {
     private ImageLoader imageLoader;
-    NetworkCallback mResultCallback = null;
+    com.example.myapplication.NetworkCallback mResultCallback = null;
     Context mContext;
 
-    public Network(NetworkCallback resultCallback, Context context) {
+    public Network(com.example.myapplication.NetworkCallback resultCallback, Context context) {
         mResultCallback = resultCallback;
         mContext = context;
     }
@@ -73,7 +73,7 @@ public class Network {
 
                 }
             });
-            Singleton.getInstance(mContext).addToRequestQueue(jsonObjReq);
+            com.example.myapplication.Singleton.getInstance(mContext).addToRequestQueue(jsonObjReq);
         } catch (Exception e) {
 
         }

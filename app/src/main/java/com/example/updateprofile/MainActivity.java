@@ -26,7 +26,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.myapplication.ImageInterface;
+import com.example.services.ImageLoader.ImageInterface;
+import com.example.services.ImageLoader.ImageInterface;
 import com.example.services.ImageLoader.ImagesLoader;
 import com.nostra13.universalimageloader.core.assist.FailReason;
 
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
 //        String url ="http://172.16.11.15:3000/informations/update";
 
         HashMap<String, String> params = new HashMap<>();
-        params.put("account_id","4");
+        params.put("account_id","9");
         params.put("first_name",fname.getText().toString());
         params.put("middle_name", mname.getText().toString());
         params.put("last_name", lname.getText().toString());

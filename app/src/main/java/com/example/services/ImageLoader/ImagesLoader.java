@@ -25,10 +25,11 @@ import org.json.JSONObject;
 //implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
 public class ImagesLoader {
     Context mContext;
-    com.example.myapplication.ImageInterface imageCallback = null;
-    com.example.myapplication.NetworkCallback mResultCallback = null;
+    com.example.services.ImageLoader.ImageInterface imageCallback;
+    com.example.services.Network.NetworkCallback mResultCallback = null;
 
-    public ImagesLoader(com.example.myapplication.ImageInterface imageCallback, Context context) {
+    public ImagesLoader(com.example.services.ImageLoader.ImageInterface imageCallback, Context context) {
+        this.imageCallback = null;
         this.imageCallback = imageCallback;
         this.mContext = context;
     }
